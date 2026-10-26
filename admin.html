@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard — BS Hardware And Sanitary</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="admin-body">
+
+  <!-- ================= ADMIN HEADER ================= -->
+  <header class="admin-top">
+    <div class="container-bs inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"><svg class="brand-glyph" viewBox="0 0 72 72" width="40" height="40" role="img" aria-label="BS Hardware And Sanitary logo"><rect x="1" y="1" width="70" height="70" rx="13" fill="#a3130b"/><rect x="5.5" y="5.5" width="61" height="61" rx="9" fill="none" stroke="#e8d3a3" stroke-width="1" opacity=".9"/><rect x="9" y="9" width="54" height="54" rx="6" fill="none" stroke="#f7f3ec" stroke-width=".5" opacity=".28"/><text x="36" y="47" text-anchor="middle" class="bm-letters" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="29" letter-spacing="-1.2" fill="#fdfbf6">BS</text><rect x="30" y="53.5" width="12" height="2" fill="#e8d3a3"/></svg></span>
+        <span class="brand-text"><strong>BS Hardware</strong><small><i></i>And Sanitary<span>Karachi</span></small></span>
+      </a>
+
+      <div class="admin-user">
+        <a class="icon-btn" href="index.html" title="View store" aria-label="View store"
+           style="width:38px;height:38px;border-color:rgba(255,255,255,.4);color:var(--cream);background:transparent">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+        </a>
+        <button class="btn-bs btn-bs-sm" type="button" id="logoutBtn" style="background:var(--gold);color:#121110;box-shadow:none">
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= ADMIN NAV ================= -->
+  <nav class="admin-nav" aria-label="Admin sections">
+    <div class="container-bs d-flex">
+      <button type="button" class="active" data-pane="dashboard">Dashboard</button>
+      <button type="button" data-pane="products">Products</button>
+      <button type="button" data-pane="orders">Orders <span id="pendingBadge" style="display:none;background:#fff;color:var(--red);font-size:.6rem;padding:1px 6px;margin-left:6px"></span></button>
+      <button type="button" data-pane="reports">Reports &amp; P&amp;L</button>
+      <button type="button" data-pane="expenses">Expenses</button>
+    </div>
+  </nav>
+
+  <main class="admin-layout">
+    <div class="container-bs">
+
+      <!-- ================= DASHBOARD ================= -->
+      <section class="admin-pane active" id="pane-dashboard">
+        <div class="admin-stats">
+          <div class="admin-stat accent">
+            <span>Net sales (30 days)</span>
+            <strong id="statRevenue">—</strong>
+            <small id="statRevenueSub">—</small>
+          </div>
+          <div class="admin-stat">
+            <span>Gross profit</span>
+            <strong id="statGrossProfit">—</strong>
+            <small id="statGrossMargin">—</small>
+          </div>
+          <div class="admin-stat">
+            <span>Net profit</span>
+            <strong id="statNetProfit">—</strong>
+            <small id="statNetMargin">—</small>
+          </div>
+          <div class="admin-stat">
+            <span>Inventory value (cost)</span>
+            <strong id="statStockValue">—</strong>
+            <small id="statStockRetail">—</small>
+          </div>
+        </div>
+
+        <div class="admin-stats admin-stats--5">
+          <div class="admin-stat">
+            <span>Orders</span>
+            <strong id="statOrders">—</strong>
+          </div>
+          <div class="admin-stat">
+            <span>Pending</span>
+            <strong id="statPending">—</strong>
+          </div>
+          <div class="admin-stat">
+            <span>Avg. order value</span>
+            <strong id="statAOV">—</strong>
+          </div>
+          <div class="admin-stat">
+            <span>Units sold</span>
+            <strong id="statUnits">—</strong>
+          </div>
+          <div class="admin-stat">
+            <span>Low / out of stock</span>
+            <strong id="statLowStock">—</strong>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-lg-7">
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <h2>Recent orders</h2>
+                <button class="btn-bs-ghost btn-bs btn-bs-sm" type="button" data-goto="orders">All orders</button>
+              </div>
+              <div class="table-wrap">
+                <table class="table-bs">
+                  <thead>
+                    <tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th></tr>
+                  </thead>
+                  <tbody id="recentOrdersBody">
+                    <tr><td colspan="4">Loading…</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <h2>Sales &amp; profit — last 14 days</h2>
+                <span class="chart-key"><i class="k-sales"></i>Sales <i class="k-profit"></i>Profit</span>
+              </div>
+              <div class="p-3">
+                <div class="chart-bars" id="chartBars"></div>
+                <div class="chart-legend" id="chartLegend"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <h2>Low stock alert</h2>
+                <span class="stock-pill low" id="lowStockCount">0</span>
+              </div>
+              <div class="table-wrap">
+                <table class="table-bs">
+                  <thead><tr><th>Product</th><th>Stock</th><th></th></tr></thead>
+                  <tbody id="lowStockBody"><tr><td colspan="3">Loading…</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="admin-panel">
+              <div class="admin-panel-head"><h2>Store status</h2></div>
+              <div class="p-3" style="font-size:.82rem">
+                <div class="detail-row"><span>Payment methods</span><strong>Easypaisa · JazzCash · COD</strong></div>
+                <div class="detail-row"><span>Delivery charges</span><strong id="feeText">Rs 250</strong></div>
+                <div class="detail-row"><span>WhatsApp</span><strong>Connected (icon)</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PRODUCTS ================= -->
+      <section class="admin-pane" id="pane-products">
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <h2>Inventory <span id="productCount" style="color:var(--muted);font-family:var(--font-body);font-weight:600"></span></h2>
+            <div class="admin-filter">
+              <input class="input-bs" type="search" id="productSearch" placeholder="Search name / SKU…" aria-label="Search products">
+              <select class="select-bs" id="productCatFilter" aria-label="Filter by category">
+                <option value="all">All categories</option>
+              </select>
+              <button class="btn-bs-red btn-bs btn-bs-sm" type="button" id="addProductBtn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                Add product
+              </button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="table-bs">
+              <thead>
+                <tr>
+                  <th>Image</th><th>Product</th><th>Category</th><th>Price</th><th>Cost / Margin</th>
+                  <th>Stock</th><th>Stock value</th><th>Status</th><th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productRows">
+                <tr><td colspan="9">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ORDERS ================= -->
+      <section class="admin-pane" id="pane-orders">
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <h2>Orders <span id="orderCount" style="color:var(--muted);font-family:var(--font-body);font-weight:600"></span></h2>
+            <div class="admin-filter">
+              <input class="input-bs" type="search" id="orderSearch" placeholder="Order no / customer / phone…" aria-label="Search orders">
+              <select class="select-bs" id="orderStatusFilter" aria-label="Filter by status">
+                <option value="all">All statuses</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <button class="btn-bs-ghost btn-bs btn-bs-sm" type="button" id="refreshOrders">Refresh</button>
+              <button class="btn-bs btn-bs-sm" type="button" id="exportOrders">Export CSV</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="table-bs" style="min-width:980px">
+              <thead>
+                <tr>
+                  <th>Order</th><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th>Profit</th>
+                  <th>Payment</th><th>Txn ID</th><th>Proof</th><th>Status</th><th></th>
+                </tr>
+              </thead>
+              <tbody id="orderRows">
+                <tr><td colspan="11">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= REPORTS & P&L ================= -->
+      <section class="admin-pane" id="pane-reports">
+        <div class="report-bar">
+          <div class="report-range" id="rangeBtns">
+            <button type="button" data-range="today">Today</button>
+            <button type="button" data-range="7" class="active">7 days</button>
+            <button type="button" data-range="30">30 days</button>
+            <button type="button" data-range="month">This month</button>
+            <button type="button" data-range="all">All time</button>
+          </div>
+          <div class="report-custom">
+            <input type="date" id="rangeFrom" class="input-bs" aria-label="From date">
+            <span>→</span>
+            <input type="date" id="rangeTo" class="input-bs" aria-label="To date">
+            <button class="btn-bs-ghost btn-bs btn-bs-sm" type="button" id="applyRange">Apply</button>
+          </div>
+          <div class="d-flex gap-2">
+            <button class="btn-bs btn-bs-sm" type="button" id="exportPnL">Export P&amp;L</button>
+            <button class="btn-bs-ghost btn-bs btn-bs-sm" type="button" id="refreshReports">Refresh</button>
+          </div>
+        </div>
+        <p class="report-range-label" id="rangeLabel">—</p>
+
+        <div class="admin-stats">
+          <div class="admin-stat accent"><span>Net sales</span><strong id="rpSales">—</strong><small id="rpSalesSub">—</small></div>
+          <div class="admin-stat"><span>Cost of goods sold</span><strong id="rpCogs">—</strong><small id="rpCogsSub">—</small></div>
+          <div class="admin-stat"><span>Gross profit</span><strong id="rpGross">—</strong><small id="rpGrossSub">—</small></div>
+          <div class="admin-stat"><span>Net profit</span><strong id="rpNet">—</strong><small id="rpNetSub">—</small></div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-lg-7">
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <h2>Profit &amp; Loss statement</h2>
+                <span style="font-size:.68rem;color:var(--muted)" id="pnlPeriod">—</span>
+              </div>
+              <div class="p-0">
+                <table class="table-bs pnl-table">
+                  <tbody id="pnlBody">
+                    <tr><td colspan="2">Loading…</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <h2>Sales trend</h2>
+                <span class="chart-key"><i class="k-sales"></i>Sales <i class="k-profit"></i>Profit</span>
+              </div>
+              <div class="p-3">
+                <div class="chart-bars chart-bars--tall" id="reportChart"></div>
+                <div class="chart-legend" id="reportChartLegend"></div>
+              </div>
+            </div>
+
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <h2>Top products</h2>
+                <span style="font-size:.68rem;color:var(--muted)">Ranked by sales</span>
+              </div>
+              <div class="table-wrap">
+                <table class="table-bs">
+                  <thead><tr><th>Product</th><th>Units</th><th>Sales</th><th>Cost</th><th>Profit</th><th>Margin</th></tr></thead>
+                  <tbody id="topProductsBody"><tr><td colspan="6">Loading…</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="admin-panel">
+              <div class="admin-panel-head"><h2>Breakdown</h2></div>
+              <div class="p-3" id="breakdownBody">Loading…</div>
+            </div>
+
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <h2>Inventory valuation</h2>
+                <span class="stock-pill" id="invUnits">0 units</span>
+              </div>
+              <div class="p-3" id="inventoryBody">Loading…</div>
+            </div>
+
+            <div class="admin-panel">
+              <div class="admin-panel-head">
+                <h2>Expenses summary</h2>
+                <button class="btn-bs btn-bs-sm" type="button" data-goto="expenses">Manage</button>
+              </div>
+              <div class="p-3" id="expenseSummaryBody">Loading…</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= EXPENSES ================= -->
+      <section class="admin-pane" id="pane-expenses">
+        <div class="admin-panel">
+          <div class="admin-panel-head">
+            <h2>Expenses <span id="expenseCount" style="color:var(--muted);font-family:var(--font-body);font-weight:600"></span></h2>
+            <div class="admin-filter">
+              <select class="select-bs" id="expenseCatFilter" aria-label="Filter expenses by category">
+                <option value="all">All categories</option>
+              </select>
+              <button class="btn-bs btn-bs-sm" type="button" id="seedExpenses">Add sample expenses</button>
+              <button class="btn-bs-red btn-bs btn-bs-sm" type="button" id="addExpenseBtn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                Add expense
+              </button>
+            </div>
+          </div>
+          <div class="admin-stats" style="margin:16px;">
+            <div class="admin-stat"><span>Total expenses</span><strong id="expTotal">—</strong></div>
+            <div class="admin-stat"><span>This month</span><strong id="expMonth">—</strong></div>
+            <div class="admin-stat"><span>Biggest category</span><strong id="expTopCat">—</strong></div>
+            <div class="admin-stat"><span>Records</span><strong id="expRecords">—</strong></div>
+          </div>
+          <div class="table-wrap">
+            <table class="table-bs">
+              <thead><tr><th>Date</th><th>Title</th><th>Category</th><th>Amount</th><th>Added by</th><th></th></tr></thead>
+              <tbody id="expenseRows"><tr><td colspan="6">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ================= PRODUCT MODAL ================= -->
+  <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModalTitle">Add product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="productForm" novalidate>
+            <input type="hidden" id="pfId">
+            <input type="hidden" id="pfImageUrl">
+
+            <div class="row g-3">
+              <div class="col-md-5">
+                <label class="form-label-bs">Product image</label>
+                <label class="image-upload-box" for="pfImage">
+                  <img id="pfImagePreview" src="assets/img/products/placeholder.svg" alt="Image preview">
+                  <span>Click to upload image</span>
+                  <small>JPG / PNG · max 5MB</small>
+                  <input type="file" id="pfImage" accept="image/*">
+                </label>
+                <div class="progress mt-2 hidden" id="pfProgressWrap"><div class="progress-bar" id="pfProgress" style="width:0%"></div></div>
+                <div class="form-hint">The image shows on the product card and the detail page.</div>
+              </div>
+
+              <div class="col-md-7">
+                <div class="mb-3">
+                  <label class="form-label-bs" for="pfName">Product name *</label>
+                  <input class="input-bs" id="pfName" type="text" placeholder="e.g. Brass Bib Cock Tap">
+                </div>
+                <div class="row g-2">
+                  <div class="col-6">
+                    <label class="form-label-bs" for="pfCategory">Category *</label>
+                    <select class="select-bs-full" id="pfCategory"></select>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label-bs" for="pfBadge">Badge</label>
+                    <select class="select-bs-full" id="pfBadge">
+                      <option value="">None</option>
+                      <option value="sale">Sale</option>
+                      <option value="new">New</option>
+                      <option value="bestseller">Bestseller</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-6 col-md-3">
+                <label class="form-label-bs" for="pfPrice">Price (Rs) *</label>
+                <input class="input-bs" id="pfPrice" type="number" min="0" step="1" placeholder="1850">
+              </div>
+              <div class="col-6 col-md-3">
+                <label class="form-label-bs" for="pfOldPrice">Old price</label>
+                <input class="input-bs" id="pfOldPrice" type="number" min="0" step="1" placeholder="2400">
+              </div>
+              <div class="col-6 col-md-3">
+                <label class="form-label-bs" for="pfCostPrice">Cost price (Rs)</label>
+                <input class="input-bs" id="pfCostPrice" type="number" min="0" step="1" placeholder="1180">
+                <div class="form-hint" id="pfMarginHint">Profit margin —</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <label class="form-label-bs" for="pfStock">Stock qty *</label>
+                <input class="input-bs" id="pfStock" type="number" min="0" step="1" placeholder="20">
+              </div>
+              <div class="col-6 col-md-3">
+                <label class="form-label-bs" for="pfUnit">Unit</label>
+                <input class="input-bs" id="pfUnit" type="text" placeholder="piece / set / kit">
+              </div>
+
+              <div class="col-6 col-md-4">
+                <label class="form-label-bs" for="pfBrand">Brand</label>
+                <input class="input-bs" id="pfBrand" type="text" placeholder="Master Brass">
+              </div>
+              <div class="col-6 col-md-4">
+                <label class="form-label-bs" for="pfSku">SKU</label>
+                <input class="input-bs" id="pfSku" type="text" placeholder="BS-TAP-101">
+              </div>
+              <div class="col-12 col-md-4 d-flex align-items-end">
+                <label class="form-check-bs mb-2">
+                  <input type="checkbox" id="pfFeatured">
+                  <span><strong>Featured</strong> — show on the home page</span>
+                </label>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label-bs" for="pfShort">Short description</label>
+                <input class="input-bs" id="pfShort" type="text" placeholder="One line that sums up the product">
+              </div>
+
+              <div class="col-12">
+                <label class="form-label-bs" for="pfDesc">Full description</label>
+                <textarea class="textarea-bs" id="pfDesc" placeholder="Full product description…"></textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-bs" for="pfHighlights">Highlights (har line alag)</label>
+                <textarea class="textarea-bs" id="pfHighlights" style="min-height:88px" placeholder="Solid brass body&#10;Leak-proof cartridge"></textarea>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label-bs" for="pfSpecs">Specs (Key: Value per line)</label>
+                <textarea class="textarea-bs" id="pfSpecs" style="min-height:88px" placeholder="Material: Brass&#10;Size: 1/2 inch"></textarea>
+              </div>
+
+              <div class="col-12">
+                <div class="err-msg" id="pfErr">Name, category, price and stock are required.</div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-bs-ghost btn-bs btn-bs-sm" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn-bs-red btn-bs btn-bs-sm" id="saveProductBtn">Save product</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ORDER MODAL ================= -->
+  <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderModalTitle">Order details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="orderModalBody"></div>
+        <div class="modal-footer">
+          <div class="d-flex flex-wrap gap-2 align-items-center w-100 justify-content-between">
+            <select class="status-select" id="modalStatus" aria-label="Order status">
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+            <button class="btn-bs-red btn-bs btn-bs-sm" type="button" id="modalStatusSave">Update status</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= EXPENSE MODAL ================= -->
+  <div class="modal fade" id="expenseModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add expense</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="expenseForm" novalidate>
+            <div class="mb-3">
+              <label class="form-label-bs" for="expTitle">Title *</label>
+              <input class="input-bs" id="expTitle" type="text" placeholder="e.g. Shop rent, Delivery fuel">
+            </div>
+            <div class="row g-2">
+              <div class="col-6">
+                <label class="form-label-bs" for="expAmount">Amount (Rs) *</label>
+                <input class="input-bs" id="expAmount" type="number" min="1" step="1" placeholder="5000">
+              </div>
+              <div class="col-6">
+                <label class="form-label-bs" for="expDate">Date</label>
+                <input class="input-bs" id="expDate" type="date">
+              </div>
+            </div>
+            <div class="mt-3">
+              <label class="form-label-bs" for="expCategory">Category</label>
+              <select class="select-bs-full" id="expCategory">
+                <option>Rent</option>
+                <option>Delivery</option>
+                <option>Packaging</option>
+                <option>Utilities</option>
+                <option>Salaries</option>
+                <option>Marketing</option>
+                <option>Repairs</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="err-msg mt-2" id="expErr">Title and amount are required.</div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-bs-ghost btn-bs btn-bs-sm" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn-bs-red btn-bs btn-bs-sm" id="saveExpenseBtn">Save expense</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PROOF MODAL ================= -->
+  <div class="modal fade" id="proofModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Payment screenshot</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img id="proofImg" class="modal-img" src="" alt="Payment screenshot">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/vendor/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap.bundle.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/order-view.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

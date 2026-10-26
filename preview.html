@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preview Map — BS Hardware And Sanitary</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--red:#a3130b;--red-deep:#7c0c06;--ink:#121110;--cream:#f7f3ec;--paper:#fffdf9;
+        --muted:#6e6558;--line:#e3dac9;--gold:#c09a54;--gold-2:#e8d3a3;--gold-deep:#8a6a2f;
+        --serif:Georgia,"Times New Roman",serif}
+  body{background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;padding:0 0 64px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  header{background:linear-gradient(160deg,#b31810,#7c0c06);color:#fffdf9;padding:44px 0 38px;position:relative;overflow:hidden;border-bottom:3px solid var(--gold)}
+  header::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(232,211,163,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(232,211,163,.14) 1px,transparent 1px);background-size:52px 52px;opacity:.85;pointer-events:none}
+  header .wrap{position:relative;z-index:1}
+  .logo{display:inline-flex;align-items:center;gap:12px;font-family:var(--serif);font-size:20px;letter-spacing:-.01em}
+  .logo i{width:46px;height:46px;background:#121110;color:var(--gold-2);display:grid;place-items:center;font-style:normal;font-family:var(--serif);font-size:17px;border:1px solid var(--gold);border-radius:10px}
+  h1{font-family:var(--serif);font-size:clamp(28px,5vw,48px);line-height:1.02;letter-spacing:-.02em;margin:24px 0 12px;font-weight:700}
+  header p{max-width:64ch;color:rgba(255,253,249,.88);font-size:15px}
+  .tag{display:inline-block;margin-top:18px;background:rgba(232,211,163,.14);border:1px solid rgba(232,211,163,.55);color:var(--gold-2);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:7px 12px}
+  h2{font-size:12px;letter-spacing:.26em;text-transform:uppercase;margin:42px 0 16px;display:flex;align-items:center;gap:12px;color:var(--gold-deep);font-weight:800}
+  h2::before{content:"";width:30px;height:1px;background:var(--gold);display:block}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+  a.card{display:block;background:var(--paper);border:1px solid var(--line);padding:20px;text-decoration:none;color:var(--ink);box-shadow:0 14px 28px -24px rgba(18,17,16,.6);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+  a.card:hover{transform:translateY(-4px);box-shadow:0 24px 40px -28px rgba(18,17,16,.65);border-color:var(--gold)}
+  .card b{display:block;font-family:var(--serif);font-size:17px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+  .card span{font-size:12.5px;color:var(--muted);display:block;line-height:1.6}
+  .card em{display:inline-block;margin-top:12px;font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);background:#faf6ee;color:#4a443a;padding:4px 8px}
+  .card.admin em{border-color:var(--gold);color:var(--gold-deep);background:#fbf7ef}
+  .box{background:var(--paper);border:1px solid var(--line);padding:20px 22px;box-shadow:0 16px 32px -28px rgba(18,17,16,.6)}
+  .box.dark{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+  .box h3{font-size:11px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:12px;color:var(--gold-deep);font-weight:800}
+  .box.dark h3{color:var(--gold-2)}
+  .box p,.box li{font-size:13.5px}
+  .box ul{margin:8px 0 0 18px}
+  .box li{margin-bottom:6px}
+  code{background:#faf6ee;border:1px solid var(--line);color:#4a443a;padding:1px 6px;font-size:12px;font-family:ui-monospace,Menlo,Consolas,monospace}
+  .box.dark code{background:rgba(232,211,163,.12);border-color:rgba(232,211,163,.35);color:var(--gold-2)}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .steps{counter-reset:s;list-style:none;margin:0}
+  .steps li{counter-increment:s;position:relative;padding-left:36px;margin-bottom:11px;font-size:13.5px}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:23px;height:23px;background:var(--ink);color:var(--gold-2);display:grid;place-items:center;font-size:11px;font-weight:700;font-family:var(--serif);border:1px solid var(--gold)}
+  .box.dark .steps li::before{background:var(--gold-2);color:var(--ink);border-color:var(--gold-2)}
+  footer{margin-top:38px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  @media(max-width:720px){.cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo"><i>BS</i> BS Hardware And Sanitary</div>
+    <h1>Full preview map</h1>
+    <p>Every page in the store — customer side and admin panel. Click any card.
+       Everything below is the live storefront — browse a page, then open the admin panel to manage it.</p>
+    <span class="tag">10 pages</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <h2>Customer side</h2>
+  <div class="grid">
+    <a class="card" href="index.html"><b>Home</b><span>Intro animation, hero, categories, bestsellers, testimonials, footer</span><em>index.html</em></a>
+    <a class="card" href="shop.html"><b>Shop / Listing</b><span>Filters, price range, sale &amp; stock filters, 5 sort options</span><em>shop.html</em></a>
+    <a class="card" href="product.html?id=p-tap-bib"><b>Product detail</b><span>Gallery, qty, stock, Add to cart, specs tabs, related products</span><em>product.html?id=…</em></a>
+    <a class="card" href="cart.html"><b>Cart</b><span>Qty update, remove, coupon BS10, WhatsApp order button</span><em>cart.html</em></a>
+    <a class="card" href="checkout.html"><b>Checkout</b><span>Address form, 3 payment options, txn ID + screenshot upload</span><em>checkout.html</em></a>
+    <a class="card" href="order-success.html"><b>Order success</b><span>Order number, full detail, WhatsApp confirmation card</span><em>order-success.html</em></a>
+    <a class="card" href="track.html"><b>Track order</b><span>Status timeline from the order number</span><em>track.html</em></a>
+    <a class="card" href="faqs.html"><b>FAQs</b><span>21 questions — delivery, payments, warranty, exchange, bulk rates. Search + category filter</span><em>faqs.html</em></a>
+  </div>
+
+  <h2>Admin panel</h2>
+  <div class="grid">
+    <a class="card admin" href="admin-login.html"><b>Admin login</b><span>Email and password login</span><em>admin-login.html</em></a>
+    <a class="card admin" href="admin.html"><b>Admin dashboard</b><span>KPIs, sales vs profit chart, inventory, orders, Reports &amp; P&amp;L, expenses, CSV export</span><em>admin.html</em></a>
+  </div>
+  <h2>Key settings</h2>
+  <div class="cols">
+    <div class="box">
+      <h3>Store settings</h3>
+      <ul>
+        <li>WhatsApp: <code>923102902382</code> (icon only, no number text)</li>
+        <li>Address: Orangi Town, Karachi, Pakistan</li>
+        <li>Delivery: Rs 250 · COD + Easypaisa / JazzCash</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <span>BS Hardware And Sanitary · Orangi Town, Karachi</span>
+    <span>Only in Karachi · Rs 250 flat delivery</span>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72" width="72" height="72">
+  <rect x="1" y="1" width="70" height="70" rx="13" fill="#a3130b"/>
+  <rect x="5.5" y="5.5" width="61" height="61" rx="9" fill="none" stroke="#e8d3a3" stroke-width="1" opacity=".9"/>
+  <rect x="9" y="9" width="54" height="54" rx="6" fill="none" stroke="#f7f3ec" stroke-width=".5" opacity=".28"/>
+  <text x="36" y="47" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-weight="700"
+        font-size="29" letter-spacing="-1.2" fill="#fdfbf6">BS</text>
+  <rect x="30" y="53.5" width="12" height="2" fill="#e8d3a3"/>
+</svg>

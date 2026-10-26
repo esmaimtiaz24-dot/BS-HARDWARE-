@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Cart — BS Hardware And Sanitary</title>
+  <meta name="description" content="Review your cart. Update quantities, remove items and head to checkout.">
+  <meta name="theme-color" content="#121110">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-page="cart">
+
+  <!-- ================= PRELOADER ================= -->
+  <div id="intro" class="preloader" role="status" aria-live="polite" aria-label="Loading BS Hardware And Sanitary">
+    <span class="pl-grid" aria-hidden="true"></span>
+    <span class="pl-glow" aria-hidden="true"></span>
+
+    <div class="pl-inner">
+      <div class="pl-mark">
+        <span class="pl-ring" aria-hidden="true"></span>
+        <svg class="pl-logo" viewBox="0 0 72 72" width="72" height="72" role="img" aria-label="BS Hardware And Sanitary logo">
+          <rect x="1" y="1" width="70" height="70" rx="13" fill="#a3130b"/>
+          <rect x="5.5" y="5.5" width="61" height="61" rx="9" fill="none" stroke="#e8d3a3" stroke-width="1" opacity=".9"/>
+          <rect x="9" y="9" width="54" height="54" rx="6" fill="none" stroke="#f7f3ec" stroke-width=".5" opacity=".28"/>
+          <text x="36" y="47" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="29" letter-spacing="-1.2" fill="#fdfbf6">BS</text>
+          <rect x="30" y="53.5" width="12" height="2" fill="#e8d3a3"/>
+        </svg>
+      </div>
+
+      <div class="pl-name">
+        <strong>BS Hardware</strong>
+        <i class="pl-rule" aria-hidden="true"></i>
+        <span>&amp; Sanitary</span>
+      </div>
+
+      <div class="pl-bar" aria-hidden="true"><i></i></div>
+      <div class="pl-tag">Orangi Town · Karachi</div>
+    </div>
+
+    <button class="intro-skip pl-skip" type="button">Skip</button>
+  </div>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <section class="page-head">
+      <div class="container-bs">
+        <div class="crumbs mb-3">
+          <a href="index.html">Home</a><span>/</span><span>Cart</span>
+        </div>
+        <span class="eyebrow">Step 1 of 3</span>
+        <h1>Your cart</h1>
+        <p class="lede mb-0">Change quantities or remove an item — totals update on their own.</p>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container-bs">
+
+        <div class="cart-steps">
+          <div class="active">1 · Cart</div>
+          <div>2 · Checkout</div>
+          <div>3 · Confirmation</div>
+        </div>
+
+        <div class="cart-layout">
+
+          <!-- ---------- CART ITEMS ---------- -->
+          <div>
+            <div class="cart-list" id="cartList">
+              <div class="cart-head">
+                <span>Item</span>
+                <span></span>
+                <span>Quantity</span>
+                <span style="text-align:right">Total</span>
+                <span></span>
+              </div>
+              <div id="cartRows">
+                <div class="p-4 text-center">Loading your cart…</div>
+              </div>
+            </div>
+
+            <div class="empty-state hidden mt-3" id="cartEmpty">
+              <h3 class="display-md">Your cart is empty</h3>
+              <p>Nothing added yet. Start from the store.</p>
+              <a class="btn-bs" href="shop.html">Shop products</a>
+            </div>
+
+            <div class="d-flex flex-wrap justify-content-between gap-2 mt-3">
+              <a class="btn-bs-ghost btn-bs btn-bs-sm" href="shop.html">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Continue shopping
+              </a>
+              <button class="btn-bs-ghost btn-bs btn-bs-sm" type="button" id="clearCart">Clear cart</button>
+            </div>
+          </div>
+
+          <!-- ---------- SUMMARY ---------- -->
+          <aside>
+            <div class="summary-card">
+              <h3>Order summary</h3>
+
+              <div class="summary-line"><span>Subtotal</span><strong id="sumSubtotal">Rs 0</strong></div>
+              <div class="summary-line hidden" id="discountRow">
+                <span>Discount <span id="couponLabel"></span></span>
+                <strong class="text-red" id="sumDiscount">− Rs 0</strong>
+              </div>
+              <div class="summary-line"><span>Delivery charges</span><strong id="sumDelivery">Rs 250</strong></div>
+              <div class="summary-line summary-pays">
+                <span>Payment options</span>
+                <strong class="pay-badges"><i>COD</i><i>Easypaisa</i><i>JazzCash</i></strong>
+              </div>
+
+              <div class="coupon-row">
+                <input type="text" id="couponInput" placeholder="Coupon code (try BS10)" autocomplete="off">
+                <button class="btn-bs btn-bs-sm" type="button" id="applyCoupon">Apply</button>
+              </div>
+              <p class="form-hint" id="couponHint">Coupon code apply karke discount lein.</p>
+
+              <div class="summary-total">
+                <span>Total</span>
+                <strong id="sumTotal">Rs 0</strong>
+              </div>
+
+              <a class="btn-bs-red btn-bs w-100 mt-4" href="checkout.html" id="checkoutBtn">
+                Proceed to checkout
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+
+              <button class="btn-bs wa-order-btn w-100 mt-2" type="button" id="waOrderBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/><path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.6 5.6 4.9.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.5-.3z"/></svg>
+                Confirm order — WhatsApp
+              </button>
+              <p class="summary-note">
+                You will get an order number once the order is placed, which you can use to track it.
+                For online payment the transaction ID and screenshot are both required.
+              </p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- suggestions -->
+    <section class="section section--paper section--tight" id="suggestSection">
+      <div class="container-bs">
+        <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+          <div>
+            <span class="eyebrow">Complete the job</span>
+            <h2 class="display-md m-0">You may also need</h2>
+          </div>
+          <a class="link-arrow" href="shop.html">All products
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="product-grid" id="suggestGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/vendor/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/whatsapp-order.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

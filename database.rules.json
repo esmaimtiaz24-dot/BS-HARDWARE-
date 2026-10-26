@@ -1,0 +1,39 @@
+{
+  "rules": {
+    "products": {
+      ".read": true,
+      ".write": "auth != null",
+      ".indexOn": ["createdAt", "category", "price"]
+    },
+
+    "orders": {
+      ".indexOn": ["orderNumber", "createdAt", "status"],
+      ".read": "auth != null",
+
+      "$orderId": {
+        ".write": "auth != null || !data.exists()",
+        "orderNumber":  { ".validate": "newData.isString() && newData.val().length < 40" },
+        "total":        { ".validate": "newData.isNumber()" },
+        "status":       { ".validate": "newData.isString()" },
+        "customer": {
+          ".validate": "newData.hasChildren(['name', 'phone', 'address'])"
+        },
+        "payment": {
+          "transactionId": { ".validate": "newData.isString()" },
+          "proofUploaded": { ".validate": "newData.isBoolean()" }
+        }
+      }
+    },
+
+    "expenses": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      ".indexOn": ["date", "category"]
+    },
+
+    "$other": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}

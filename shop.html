@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop All Products — BS Hardware And Sanitary</title>
+  <meta name="description" content="The full range of hardware, sanitary, hand tools, pipes, paint, electrical and safety products. Filter by category, price and availability.">
+  <meta name="theme-color" content="#121110">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-page="shop">
+
+  <!-- ================= PRELOADER ================= -->
+  <div id="intro" class="preloader" role="status" aria-live="polite" aria-label="Loading BS Hardware And Sanitary">
+    <span class="pl-grid" aria-hidden="true"></span>
+    <span class="pl-glow" aria-hidden="true"></span>
+
+    <div class="pl-inner">
+      <div class="pl-mark">
+        <span class="pl-ring" aria-hidden="true"></span>
+        <svg class="pl-logo" viewBox="0 0 72 72" width="72" height="72" role="img" aria-label="BS Hardware And Sanitary logo">
+          <rect x="1" y="1" width="70" height="70" rx="13" fill="#a3130b"/>
+          <rect x="5.5" y="5.5" width="61" height="61" rx="9" fill="none" stroke="#e8d3a3" stroke-width="1" opacity=".9"/>
+          <rect x="9" y="9" width="54" height="54" rx="6" fill="none" stroke="#f7f3ec" stroke-width=".5" opacity=".28"/>
+          <text x="36" y="47" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="29" letter-spacing="-1.2" fill="#fdfbf6">BS</text>
+          <rect x="30" y="53.5" width="12" height="2" fill="#e8d3a3"/>
+        </svg>
+      </div>
+
+      <div class="pl-name">
+        <strong>BS Hardware</strong>
+        <i class="pl-rule" aria-hidden="true"></i>
+        <span>&amp; Sanitary</span>
+      </div>
+
+      <div class="pl-bar" aria-hidden="true"><i></i></div>
+      <div class="pl-tag">Orangi Town · Karachi</div>
+    </div>
+
+    <button class="intro-skip pl-skip" type="button">Skip</button>
+  </div>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <!-- ================= PAGE HEAD ================= -->
+    <section class="page-head">
+      <div class="container-bs">
+        <div class="crumbs mb-3">
+          <a href="index.html">Home</a><span>/</span><span id="crumbCurrent">Shop</span>
+        </div>
+        <span class="eyebrow">Product listing</span>
+        <h1 id="shopTitle">All products</h1>
+        <p class="lede mb-0" id="shopSub">Hardware, sanitary, tools and electrical — everything under one roof.</p>
+      </div>
+    </section>
+
+    <!-- ================= SHOP ================= -->
+    <section class="section section--tight">
+      <div class="container-bs">
+        <div class="shop-layout">
+
+          <!-- ---------- FILTERS ---------- -->
+          <aside class="filters" id="filters">
+            <div class="filter-block">
+              <h4>Categories</h4>
+              <ul class="filter-list" id="filterCats">
+                <li><button class="filter-link active" type="button" data-cat="all">All products <span>—</span></button></li>
+              </ul>
+            </div>
+
+            <div class="filter-block">
+              <h4>Price (Rs)</h4>
+              <div class="price-inputs">
+                <input type="number" id="minPrice" placeholder="Min" min="0" inputmode="numeric">
+                <span>—</span>
+                <input type="number" id="maxPrice" placeholder="Max" min="0" inputmode="numeric">
+              </div>
+              <button class="btn-bs btn-bs-sm w-100 mt-3" type="button" id="applyPrice">Apply price</button>
+            </div>
+
+            <div class="filter-block">
+              <h4>Availability</h4>
+              <label class="form-check-bs mb-2">
+                <input type="checkbox" id="inStockOnly"> <span>In-stock only</span>
+              </label>
+              <label class="form-check-bs">
+                <input type="checkbox" id="saleOnly"> <span>On sale only</span>
+              </label>
+            </div>
+
+            <div class="filter-block">
+              <h4>Need help?</h4>
+              <p style="font-size:.8rem;color:var(--muted);margin-bottom:14px">
+                Not sure which product you need? Ask us on WhatsApp.
+              </p>
+              <a class="btn-bs btn-bs-sm w-100" href="https://wa.me/923102902382" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+                Ask on WhatsApp
+              </a>
+            </div>
+          </aside>
+
+          <!-- ---------- RESULTS ---------- -->
+          <div>
+            <div class="chip-row" id="quickChips">
+              <button class="chip active" type="button" data-chip="all">All</button>
+              <button class="chip" type="button" data-chip="sale">On sale</button>
+              <button class="chip" type="button" data-chip="stock">In stock</button>
+              <button class="chip" type="button" data-chip="new">New arrivals</button>
+            </div>
+
+            <div class="shop-toolbar">
+              <span class="result-count" id="resultCount">Loading…</span>
+              <div class="d-flex gap-2 align-items-center">
+                <button class="btn-bs-ghost btn-bs btn-bs-sm d-lg-none" type="button" id="filterToggle">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 3H2l8 9.5V19l4 2v-8.5z"/></svg>
+                  Filters
+                </button>
+                <select class="select-bs" id="sortSelect" aria-label="Sort products">
+                  <option value="featured">Sort: Featured</option>
+                  <option value="price-low">Price: Low to high</option>
+                  <option value="price-high">Price: High to low</option>
+                  <option value="new">Newest first</option>
+                  <option value="name">Name: A–Z</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="product-grid cols-3" id="shopGrid">
+              <!-- js/shop.js -->
+            </div>
+
+            <div id="shopEmpty" class="empty-state hidden mt-4">
+              <h3 class="display-md">Nothing matched</h3>
+              <p>Try different filters or another keyword.</p>
+              <button class="btn-bs" type="button" id="resetFilters">Reset filters</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/vendor/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/whatsapp-order.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout — BS Hardware And Sanitary</title>
+  <meta name="description" content="Enter your delivery details and pick a payment method — COD, Easypaisa or JazzCash. Online payment needs a transaction ID and screenshot.">
+  <meta name="theme-color" content="#121110">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-page="checkout">
+
+  <!-- ================= PRELOADER ================= -->
+  <div id="intro" class="preloader" role="status" aria-live="polite" aria-label="Loading BS Hardware And Sanitary">
+    <span class="pl-grid" aria-hidden="true"></span>
+    <span class="pl-glow" aria-hidden="true"></span>
+
+    <div class="pl-inner">
+      <div class="pl-mark">
+        <span class="pl-ring" aria-hidden="true"></span>
+        <svg class="pl-logo" viewBox="0 0 72 72" width="72" height="72" role="img" aria-label="BS Hardware And Sanitary logo">
+          <rect x="1" y="1" width="70" height="70" rx="13" fill="#a3130b"/>
+          <rect x="5.5" y="5.5" width="61" height="61" rx="9" fill="none" stroke="#e8d3a3" stroke-width="1" opacity=".9"/>
+          <rect x="9" y="9" width="54" height="54" rx="6" fill="none" stroke="#f7f3ec" stroke-width=".5" opacity=".28"/>
+          <text x="36" y="47" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-weight="700" font-size="29" letter-spacing="-1.2" fill="#fdfbf6">BS</text>
+          <rect x="30" y="53.5" width="12" height="2" fill="#e8d3a3"/>
+        </svg>
+      </div>
+
+      <div class="pl-name">
+        <strong>BS Hardware</strong>
+        <i class="pl-rule" aria-hidden="true"></i>
+        <span>&amp; Sanitary</span>
+      </div>
+
+      <div class="pl-bar" aria-hidden="true"><i></i></div>
+      <div class="pl-tag">Orangi Town · Karachi</div>
+    </div>
+
+    <button class="intro-skip pl-skip" type="button">Skip</button>
+  </div>
+
+  <div id="site-header"></div>
+
+  <main>
+
+    <section class="page-head">
+      <div class="container-bs">
+        <div class="crumbs mb-3">
+          <a href="index.html">Home</a><span>/</span>
+          <a href="cart.html">Cart</a><span>/</span><span>Checkout</span>
+        </div>
+        <span class="eyebrow">Step 2 of 3</span>
+        <h1>Checkout</h1>
+        <p class="lede mb-0">Fill in your delivery details, choose a payment method and confirm the order.</p>
+      </div>
+    </section>
+
+    <section class="section section--tight">
+      <div class="container-bs">
+
+        <div class="cart-steps">
+          <div class="done">1 · Cart</div>
+          <div class="active">2 · Checkout</div>
+          <div>3 · Confirmation</div>
+        </div>
+
+        <!-- empty cart warning -->
+        <div class="empty-state hidden" id="checkoutEmpty">
+          <h3 class="display-md">Your cart is empty</h3>
+          <p>Add a product first, then come back here.</p>
+          <a class="btn-bs" href="shop.html">Shop now</a>
+        </div>
+
+        <div class="checkout-layout" id="checkoutLayout">
+          <div>
+            <form id="checkoutForm" novalidate autocomplete="on">
+
+              <!-- ---------- STEP 1 ---------- -->
+              <div class="checkout-block">
+                <h2><span class="step-num">1</span> Delivery details</h2>
+
+                <div class="form-grid">
+                  <div>
+                    <label class="form-label-bs" for="fullName">Full name *</label>
+                    <input class="input-bs" id="fullName" name="fullName" type="text" placeholder="Your full name" autocomplete="name">
+                    <div class="err-msg" data-err="fullName">Enter your full name (at least 3 characters).</div>
+                  </div>
+
+                  <div>
+                    <label class="form-label-bs" for="phone">Mobile number *</label>
+                    <input class="input-bs" id="phone" name="phone" type="tel" placeholder="03xx-xxxxxxx" inputmode="tel" autocomplete="tel">
+                    <div class="err-msg" data-err="phone">Enter a valid mobile number — e.g. 0300-1234567.</div>
+                  </div>
+
+                  <div>
+                    <label class="form-label-bs" for="email">Email <span style="text-transform:none;letter-spacing:0;color:var(--muted)">(optional)</span></label>
+                    <input class="input-bs" id="email" name="email" type="email" placeholder="you@email.com" autocomplete="email">
+                    <div class="err-msg" data-err="email">That email address does not look right.</div>
+                  </div>
+
+                  <div>
+                    <label class="form-label-bs" for="city">City *</label>
+                    <input class="input-bs" id="city" name="city" type="text" placeholder="Karachi" value="Karachi" autocomplete="address-level2">
+                    <div class="err-msg" data-err="city">Enter your city.</div>
+                  </div>
+
+                  <div class="full">
+                    <label class="form-label-bs" for="address">Complete address *</label>
+                    <textarea class="textarea-bs" id="address" name="address" placeholder="House / shop number, street, block, area…" autocomplete="street-address"></textarea>
+                    <div class="err-msg" data-err="address">Enter the full address so delivery goes smoothly.</div>
+                  </div>
+
+                  <div>
+                    <label class="form-label-bs" for="landmark">Nearby landmark</label>
+                    <input class="input-bs" id="landmark" name="landmark" type="text" placeholder="Mosque / school / market">
+                  </div>
+
+                  <div>
+                    <label class="form-label-bs" for="note">Order note</label>
+                    <input class="input-bs" id="note" name="note" type="text" placeholder="Any special instruction (optional)">
+                  </div>
+                </div>
+              </div>
+
+              <!-- ---------- STEP 2 ---------- -->
+              <div class="checkout-block">
+                <h2><span class="step-num">2</span> Payment method</h2>
+                <p style="font-size:.86rem;color:var(--muted);margin-top:-8px;margin-bottom:18px">
+                  Cash on delivery or an online transfer — whichever is easier. For online payment a
+                  <strong>transaction ID</strong> and a <strong>payment screenshot</strong> are both required.
+                </p>
+
+                <div class="pay-options" id="payOptions">
+                  <!-- js/checkout.js renders payment options + account details -->
+                </div>
+
+                <label class="form-check-bs mt-4">
+                  <input type="checkbox" id="agree">
+                  <span>I agree to the order details and terms. Delivery charges are
+                    <strong>Rs <span id="agreeFee">250</span></strong>.</span>
+                </label>
+                <div class="err-msg" id="agreeErr">Please tick the checkbox before placing the order.</div>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- ---------- SUMMARY ---------- -->
+          <aside class="order-summary-col">
+            <div class="summary-card">
+              <h3>Your order</h3>
+
+              <div class="mini-summary" id="miniItems"></div>
+
+              <div class="summary-line"><span>Subtotal</span><strong id="coSubtotal">Rs 0</strong></div>
+              <div class="summary-line hidden" id="coDiscountRow">
+                <span>Discount</span><strong class="text-red" id="coDiscount">− Rs 0</strong>
+              </div>
+              <div class="summary-line"><span>Delivery charges</span><strong id="coDelivery">Rs 250</strong></div>
+
+              <div class="summary-total">
+                <span>Total payable</span>
+                <strong id="coTotal">Rs 0</strong>
+              </div>
+
+              <button class="btn-bs-red btn-bs w-100 mt-4" type="button" id="placeOrder">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Place order
+              </button>
+
+              <div class="secure-row">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Secure checkout · COD available
+              </div>
+              <p class="summary-note">
+                You will get an order number once the order is confirmed. Orders with online payment
+                are dispatched only after the payment is verified.
+              </p>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="assets/vendor/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/whatsapp-order.js"></script>
+  <script src="js/checkout.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>
